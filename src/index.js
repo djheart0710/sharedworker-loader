@@ -94,7 +94,7 @@ export function pitch(request) {
 
       delete this._compilation.assets[worker.file];
 
-      return cb(null, `module.exports = function() {\n  return ${worker.factory};\n};`);
+      return cb(null, `module.exports = function SharedWorkerWrapper(name) {\n  return ${worker.factory};\n};`);
     }
 
     return cb(null, null);

@@ -7,7 +7,7 @@ const getWorker = (file, content, options) => {
 
   const publicWorkerPath = `${publicPath} + ${JSON.stringify(file)}`;
 
-  return `new SharedWorker(${publicWorkerPath}, ${options.name})`;
+  return `new SharedWorker(${publicWorkerPath}, name)`;
 };
 
 export default getWorker;
