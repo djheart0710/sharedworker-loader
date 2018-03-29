@@ -1,6 +1,6 @@
 {
   "name": "sharedworker-loader",
-  "version": "2.0.0-2",
+  "version": "2.0.0",
   "author": "Jordan Gensler <jordangens@gmail.com>",
   "description": "shared worker loader module for webpack",
   "main": "dist/cjs.js",
