@@ -90,8 +90,6 @@ export function pitch(request) {
         options
       );
 
-      delete this._compilation.assets[worker.file];
-
       return cb(null, `module.exports = function SharedWorkerWrapper(name) {\n  return ${worker.factory};\n};`);
     }
 
