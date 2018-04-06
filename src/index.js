@@ -11,7 +11,6 @@ import schema from './options.json';
 import loaderUtils from 'loader-utils';
 import validateOptions from 'schema-utils';
 
-import NodeTargetPlugin from 'webpack/lib/node/NodeTargetPlugin';
 import SingleEntryPlugin from 'webpack/lib/SingleEntryPlugin';
 import WebWorkerTemplatePlugin from 'webpack/lib/webworker/WebWorkerTemplatePlugin';
 
@@ -47,16 +46,14 @@ export function pitch(request) {
     filename,
     chunkFilename: `[id].${filename}`,
     namedChunkFilename: null,
+    // Force global object to be self to avoid it being "window":
+    globalObject: 'self',
   };
 
   worker.compiler = this._compilation
     .createChildCompiler('worker', worker.options);
 
   new WebWorkerTemplatePlugin(worker.options).apply(worker.compiler);
-
-  if (this.target !== 'webworker' && this.target !== 'web') {
-    new NodeTargetPlugin().apply(worker.compiler);
-  }
 
   new SingleEntryPlugin(this.context, `!!${request}`, 'main').apply(worker.compiler);
 
