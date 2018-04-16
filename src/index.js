@@ -35,7 +35,7 @@ export function pitch(request) {
 
   const cb = this.async();
 
-  const filename = loaderUtils.interpolateName(this, options.name || '[hash].worker.js', {
+  const filename = loaderUtils.interpolateName(this, options.name || '[contenthash].worker.js', {
     context: options.context || this.rootContext || this.options.context,
     regExp: options.regExp,
   });
