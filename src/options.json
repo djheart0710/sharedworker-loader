@@ -4,9 +4,6 @@
     "name": {
       "type": "string"
     },
-    "prefix": {
-      "type": "string"
-    },
     "publicPath": {
       "type": "string"
     }

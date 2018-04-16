@@ -39,11 +39,7 @@ export function pitch(request) {
   if (!nameTemplate) {
     // TODO: Ideally use a more robust env check:
     nameTemplate =
-      process.env.NODE_ENV === 'production' ? '[name].[contenthash].worker.js' : '[name].worker.js';
-  }
-
-  if (options.prefix) {
-    nameTemplate = options.prefix + nameTemplate;
+      process.env.NODE_ENV === 'production' ? '[name].[hash].worker.js' : '[name].worker.js';
   }
 
   const filename = loaderUtils.interpolateName(this, nameTemplate, {
