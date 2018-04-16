@@ -27,7 +27,7 @@ export function pitch(request) {
   if (!this.webpack) {
     throw new LoaderError({
       name: 'Worker Loader',
-      message: 'This loader is only usable with webpack'
+      message: 'This loader is only usable with webpack',
     });
   }
 
@@ -35,7 +35,18 @@ export function pitch(request) {
 
   const cb = this.async();
 
-  const filename = loaderUtils.interpolateName(this, options.name || '[contenthash].worker.js', {
+  let nameTemplate = options.name;
+  if (!nameTemplate) {
+    // TODO: Ideally use a more robust env check:
+    nameTemplate =
+      process.env.NODE_ENV === 'production' ? '[name].[contenthash].worker.js' : '[name].worker.js';
+  }
+
+  if (options.prefix) {
+    nameTemplate = options.prefix + nameTemplate;
+  }
+
+  const filename = loaderUtils.interpolateName(this, nameTemplate, {
     context: options.context || this.rootContext || this.options.context,
     regExp: options.regExp,
   });
@@ -50,8 +61,7 @@ export function pitch(request) {
     globalObject: 'self',
   };
 
-  worker.compiler = this._compilation
-    .createChildCompiler('worker', worker.options);
+  worker.compiler = this._compilation.createChildCompiler('worker', worker.options);
 
   new WebWorkerTemplatePlugin(worker.options).apply(worker.compiler);
 
@@ -81,13 +91,12 @@ export function pitch(request) {
     if (entries[0]) {
       worker.file = entries[0].files[0];
 
-      worker.factory = getWorker(
-        worker.file,
-        compilation.assets[worker.file].source(),
-        options
-      );
+      worker.factory = getWorker(worker.file, compilation.assets[worker.file].source(), options);
 
-      return cb(null, `module.exports = function SharedWorkerWrapper(name) {\n  return ${worker.factory};\n};`);
+      return cb(
+        null,
+        `module.exports = function SharedWorkerWrapper(name) {\n  return ${worker.factory};\n};`,
+      );
     }
 
     return cb(null, null);
