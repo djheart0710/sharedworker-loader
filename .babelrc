@@ -1,9 +1,9 @@
 {
   "presets": [
     [
-      "@babel/preset-env",
+      "env",
       {
-        "useBuiltIns": "usage",
+        "useBuiltIns": true,
         "targets": {
           "node": "4.8"
         },
@@ -16,19 +16,19 @@
   ],
   "plugins": [
     [
-      "@babel/plugin-proposal-object-rest-spread",
+      "transform-object-rest-spread",
       {
-        "useBuiltIns": "usage"
+        "useBuiltIns": true
       }
     ]
   ],
   "env": {
     "test": {
       "presets": [
-        "@babel/preset-env"
+        "env"
       ],
       "plugins": [
-        "@babel/plugin-proposal-object-rest-spread"
+        "transform-object-rest-spread"
       ]
     }
   }
