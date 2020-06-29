@@ -20,6 +20,15 @@
       {
         "useBuiltIns": "usage"
       }
+    ],
+    [
+      "@babel/plugin-transform-classes",
+      {
+        "globals": [
+          "Error",
+          "Array"
+        ]
+      }
     ]
   ],
   "env": {
