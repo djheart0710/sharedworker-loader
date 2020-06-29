@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.6"></a>
+## [2.1.6](https://github.com/webpack-contrib/worker-loader/compare/v2.1.4...v2.1.6) (2020-06-29)
+
+
+
 <a name="2.1.4"></a>
 ## [2.1.4](https://github.com/webpack-contrib/worker-loader/compare/v2.1.2...v2.1.4) (2020-06-29)
 
